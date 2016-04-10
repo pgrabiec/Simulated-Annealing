@@ -101,8 +101,6 @@ public class Sudoku {
         int energy = 0;
 
         int[] used = new int[10];
-        Arrays.fill(used, 0);
-
 
         // Check by row
         for (int row=0; row<9; row++) {
@@ -113,8 +111,8 @@ public class Sudoku {
             }
 
             for (int i=1; i<=9; i++) {
-                if (used[i] == 1) {
-                    energy--;
+                if (used[i] > 1) {
+                    energy += used[i] - 1;
                 }
             }
         }
@@ -130,57 +128,11 @@ public class Sudoku {
             }
 
             for (int i=1; i<=9; i++) {
-                if (used[i] == 1) {
-                    energy--;
+                if (used[i] > 1) {
+                    energy += used[i] - 1;
                 }
             }
         }
-
-        /*
-        // Check by row
-        for (int row=0; row<9; row++) {
-            initUsed();
-            for (int column=0; column<9; column++) {
-                int num = S[row][column];
-                if (used[num]) {
-                    energy += 1;
-                }
-
-                used[num] = true;
-            }
-        }
-
-        // Check by column
-        for (int column=0; column<9; column++) {
-            initUsed();
-            for (int row=0; row<9; row++) {
-                int num = S[row][column];
-                if (used[num]) {
-                    energy += 1;
-                }
-
-                used[num] = true;
-            }
-        }
-
-        // Check by squares
-        for (int squareBeginRow = 0; squareBeginRow < 9; squareBeginRow += 3) {
-            for (int squareBeginColumn = 0; squareBeginColumn < 9; squareBeginColumn += 3) {
-                initUsed();
-                for (int row = squareBeginRow; row < squareBeginRow + 3; row++) {
-                    for (int column = squareBeginColumn; column < squareBeginColumn + 3; column++) {
-                        int num = S[row][column];
-                        if (used[num]) {
-                            energy += 1;
-                        }
-
-                        used[num] = true;
-                    }
-                }
-
-            }
-        }
-        */
 
         return energy;
     }
@@ -229,19 +181,13 @@ public class Sudoku {
         List<Point> squaresToFillCopy = squaresToFill;
         Map<Point, Point[]> squarePointsToSwapCopy = squarePointsToSwap;
 
-        Sudoku copy =  new Sudoku(
+        return new Sudoku(
                 sCopy,
                 initialFillMaskCopy,
                 squaresToFillCopy,
                 squarePointsToSwapCopy
         );
-
-        return copy;
     }
-
-
-
-
 
     public Sudoku getNeighbour() {
         Point[] toSwap = getTwoFieldsToSwap();
@@ -307,31 +253,17 @@ public class Sudoku {
     private Point[] getTwoFieldsToSwap() {
         if (squaresToFill.size() < 1) {
             if (getEnergy() == 0) {
-                System.out.println("Solved:");
+                System.out.println("Solved in 1 iteration");
                 print();
                 System.exit(0);
             }
             throw new IllegalStateException("No squares to fill");
         }
 
-
         int randSquareIndex = (int) (Math.random() * squaresToFill.size()) % squaresToFill.size();
         Point randSquare = squaresToFill.get(randSquareIndex);
 
         Point[] swappingPoints = squarePointsToSwap.get(randSquare);
-
-        /*
-        Point[] result = new Point[2];
-        int randSwap1 = (int) (Math.random() * swappingPoints.length) % swappingPoints.length;
-        //int randSwap2 = (randSwap1 + (int) ( 1 + Math.random() * (swappingPoints.length - 2))) % swappingPoints.length;
-        int randSwap2 = (randSwap1 + 1) % swappingPoints.length;
-
-        Point p1 = swappingPoints[randSwap1];
-        Point p2 = swappingPoints[randSwap2];
-
-        result[0] = p1;
-        result[1] = p2;
-        */
 
         return getPointsToSwapInSquare(swappingPoints);
     }
@@ -407,16 +339,6 @@ public class Sudoku {
         }
 
         return result;
-    }
-
-    public void printSwappings() {
-        for (Point square : squaresToFill) {
-            System.out.println("Square: " + square);
-            for (Point p : squarePointsToSwap.get(square)) {
-                System.out.println("\t" + p);
-            }
-        }
-        System.out.println();
     }
 
     @Override

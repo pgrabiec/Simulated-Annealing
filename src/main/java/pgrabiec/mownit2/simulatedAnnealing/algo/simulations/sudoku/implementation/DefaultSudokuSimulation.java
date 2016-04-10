@@ -5,7 +5,7 @@ import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.sudoku.Sudoku;
 import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.sudoku.SudokuSimulation;
 
 public class DefaultSudokuSimulation extends SudokuSimulation {
-    private static final double STOP_ENERGY = -162.0;
+    private static final double STOP_ENERGY = 0.0;
 
     public DefaultSudokuSimulation(double randomCoefficient, TemperatureFunction energyFunction, Sudoku initialSudoku) {
         super(randomCoefficient, energyFunction, initialSudoku);
