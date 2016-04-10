@@ -93,18 +93,7 @@ public abstract class SimulatedAnnealing<T> {
         return probability >= rand;
     }
 
-    /**
-     * Additional loop condition
-     *
-     * @return  true when the search must be continued regardless of the energy state
-     *          false otherwise
-     *
-    protected boolean proceed(double currentEnergy, T currentPoint) {
-        return false;
-    }
-    */
-
-    protected abstract void optimalChanged(T current, double currentValue, long iterations);
+    protected abstract void optimalChanged(T current, double currentEnergy, long iterations);
     protected abstract void accepted(T point, double energy);
 
     protected abstract T getValueCopyOf(T data);

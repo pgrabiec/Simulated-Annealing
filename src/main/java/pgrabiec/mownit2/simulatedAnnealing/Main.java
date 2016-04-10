@@ -7,35 +7,39 @@ import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.binaryImage.implemen
 import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.salesman.PointsGenerator;
 import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.salesman.implementetion.SalesmanArbitrarySwap;
 import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.salesman.implementetion.SalesmanConsecutiveSwap;
+import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.sudoku.Sudoku;
+import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.sudoku.SudokuIO;
+import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.sudoku.implementation.DefaultSudokuSimulation;
 import pgrabiec.mownit2.simulatedAnnealing.algo.temperatureFunctions.LinearTemperatureDrop;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        final double coefficient = 1e-1;
+        testSalesman();
 
-        /*
+        testBinaryImageSolver();
+
+        testSudoku();
+    }
+
+    private static void testSudoku() {
+        double coefficient = 1e1;
+
         Sudoku sudoku;
 
         try {
             sudoku = SudokuIO.readSudoku("sudoku.txt", " ");
 
-            SimulatedAnnealing<Sudoku> sudokuSimunation = new DefaultSudokuSimulation(
+            new DefaultSudokuSimulation(
                     coefficient,
                     TemperatureFunction.getDefaultLinear(),
                     sudoku
-            );
-
-            sudokuSimunation.solve();
+            ).solve();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
-
-        testSalesman();
-
-        testBinaryImageSolver();
     }
 
     private static void testSalesman() {

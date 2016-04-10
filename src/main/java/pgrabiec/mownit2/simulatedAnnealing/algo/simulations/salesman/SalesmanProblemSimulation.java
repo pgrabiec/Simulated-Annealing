@@ -1,7 +1,7 @@
 package pgrabiec.mownit2.simulatedAnnealing.algo.simulations.salesman;
 
-import pgrabiec.mownit2.simulatedAnnealing.algo.TemperatureFunction;
 import pgrabiec.mownit2.simulatedAnnealing.algo.SimulatedAnnealing;
+import pgrabiec.mownit2.simulatedAnnealing.algo.TemperatureFunction;
 import pgrabiec.mownit2.simulatedAnnealing.algo.simulations.salesman.visualization.GraphPointVisualization;
 
 import java.awt.*;
@@ -20,7 +20,7 @@ public abstract class SalesmanProblemSimulation extends SimulatedAnnealing<Point
     }
 
     @Override
-    protected void optimalChanged(Point[] current, double currentValue, long iterations) {
+    protected void optimalChanged(Point[] current, double currentEnergy, long iterations) {
         visualization.setEdges(current);
     }
 

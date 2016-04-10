@@ -17,8 +17,8 @@ public class DefaultSudokuSimulation extends SudokuSimulation {
     }
 
     @Override
-    protected void optimalChanged(Sudoku current, double currentValue, long iterations) {
-        if (currentValue == STOP_ENERGY) {
+    protected void optimalChanged(Sudoku current, double currentEnergy, long iterations) {
+        if (currentEnergy == STOP_ENERGY) {
             int emptyCount = 0;
             for (boolean[] notEmpty : current.getInitialFillMask()) {
                 for (boolean b : notEmpty) {
@@ -32,7 +32,7 @@ public class DefaultSudokuSimulation extends SudokuSimulation {
             current.print();
             System.exit(0);
         }
-        System.out.println("Optimal:\t" + currentValue + "\tIterations: " + iterations);
+        System.out.println("Optimal:\t" + currentEnergy + "\tIterations: " + iterations);
         current.print();
     }
 

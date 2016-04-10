@@ -132,7 +132,7 @@ public class DefaultBinarySimulation extends BinaryImageSimulation{
     protected void accepted(BinaryImage point, double energy) {}
 
     @Override
-    protected void optimalChanged(BinaryImage current, double currentValue, long iterations) {
+    protected void optimalChanged(BinaryImage current, double currentEnergy, long iterations) {
         bestVisualization.updateImage(current);
     }
 }
